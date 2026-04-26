@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 16:04:13 by muayna            #+#    #+#             */
-/*   Updated: 2026/04/26 16:20:34 by muayna           ###   ########.fr       */
+/*   Updated: 2026/04/26 16:54:11 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,12 @@ int	ft_atoi(const char *nptr)
 		i++;
 	}
 	return (number * countnp);
+}
+
+int	ft_isdigit(int c)
+{
+	if (c >= 48 && c <= 57)
+		return (1);
+	else
+		return (0);
 }

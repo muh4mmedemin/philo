@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 16:04:24 by muayna            #+#    #+#             */
-/*   Updated: 2026/04/26 16:35:40 by muayna           ###   ########.fr       */
+/*   Updated: 2026/04/26 16:54:18 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,6 @@
 # include "../libs/garbage_collector/gb.h"
 
 int	ft_atoi(const char *nptr);
+int	ft_isdigit(int c);
 
 #endif
