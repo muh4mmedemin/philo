@@ -6,11 +6,26 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 13:29:50 by muayna            #+#    #+#             */
-/*   Updated: 2026/04/26 18:12:04 by muayna           ###   ########.fr       */
+/*   Updated: 2026/04/26 21:59:36 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
+void isbiggerint(char **argv)
+{
+    unsigned long i;
+
+    i = 0;
+    while(argv[i])
+    {
+        if(ft_strlen(argv[i]) > 10)
+            exit_program("Max Int Value");
+        else if(ft_atoi(argv[i]) > 2147483647)
+            exit_program("Max Int Value");
+        i++;
+    }
+}
 
 void check_all_digit(char **argv, int argc)
 {
@@ -37,6 +52,7 @@ void check_error(char **argv, int argc)
     if(argc != 5 && argc != 6)
         exit_program("Missing or excessive values ​​were entered.");
     check_all_digit(argv, argc);
+    isbiggerint(argv);
 }
 
 void init_args(t_args **args_list, char **argv, int argc)

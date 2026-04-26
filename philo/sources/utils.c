@@ -6,17 +6,27 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 16:04:13 by muayna            #+#    #+#             */
-/*   Updated: 2026/04/26 16:54:11 by muayna           ###   ########.fr       */
+/*   Updated: 2026/04/26 21:51:47 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/utils.h"
 
-int	ft_atoi(const char *nptr)
+size_t	ft_strlen(const char *s)
 {
 	int	i;
-	int	countnp;
-	int	number;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
+
+long	ft_atoi(const char *nptr)
+{
+	int		i;
+	int		countnp;
+	long	number;
 
 	number = 0;
 	countnp = 1;
