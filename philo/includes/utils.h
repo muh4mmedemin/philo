@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/26 13:30:07 by muayna            #+#    #+#             */
-/*   Updated: 2026/04/26 16:17:45 by muayna           ###   ########.fr       */
+/*   Created: 2026/04/26 16:04:24 by muayna            #+#    #+#             */
+/*   Updated: 2026/04/26 16:05:15 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#ifndef UTILS_H
+# define UTILS_H
 
-int main(int argc, char **argv)
-{
-    t_args *args;
+# include "philo.h"
 
-    args = malloc(sizeof(t_args) * 1);
-    init_args(&args, argv, argc);
-    printf("%d\n",args->eat_count);
-    printf("%d\n",args->number_of_phil);
-    printf("%d\n",args->time_to_die);
-    printf("%d\n",args->time_to_eat);
-    printf("%d\n", args->time_to_sleep);
-}
+int	ft_atoi(const char *nptr);
+
+#endif
