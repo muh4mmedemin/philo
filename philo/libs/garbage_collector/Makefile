@@ -5,37 +5,37 @@
 #                                                     +:+ +:+         +:+      #
 #    By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2026/04/26 16:11:09 by muayna            #+#    #+#              #
-#    Updated: 2026/04/26 16:31:21 by muayna           ###   ########.fr        #
+#    Created: 2026/04/26 16:28:04 by muayna            #+#    #+#              #
+#    Updated: 2026/04/26 16:28:21 by muayna           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = philo
-SRCS = sources/init.c sources/main.c sources/monitor.c sources/routine.c sources/utils.c
+NAME = libgb.a
 
-OBJS = $(SRCS:.c=.o)
-GB = libs/garbage_collector
-GB_LIB = $(GB)/libgb.a
+C_FILES = ./gb.c
+INC = -I./
+
+OBJ_DIR = ./obj/
+OBJS = $(addprefix $(OBJ_DIR), $(C_FILES:.c=.o))
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -Iincludes -I$(GB)
-RM = rm -rf
+W_FLAGS = -Wall -Wextra -Werror
+CC_ARGS = $(W_FLAGS) $(INC)
 
-all: $(GB_LIB) $(NAME)
+all: $(NAME)
 
-$(NAME): $(OBJS) $(GB_LIB)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(GB_LIB)
+$(NAME): $(OBJS)
+	ar -rcs $@ $?
 
-$(GB_LIB):
-	$(MAKE) -C $(GB)
+$(OBJ_DIR)%.o: %.c
+	mkdir -p $(dir $@)
+	$(CC) $(CC_ARGS) $? -c -o $@
 
 clean:
-	$(RM) $(OBJS)
-	$(MAKE) -C $(GB) clean
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
-	$(RM) $(NAME)
-	$(MAKE) -C $(GB) fclean
+	rm -rf $(NAME)
 
 re: fclean all
 

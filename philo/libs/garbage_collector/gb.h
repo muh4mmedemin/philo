@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   gb.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/26 16:04:24 by muayna            #+#    #+#             */
-/*   Updated: 2026/04/26 16:35:40 by muayna           ###   ########.fr       */
+/*   Created: 2025/11/16 03:03:19 by yademirk          #+#    #+#             */
+/*   Updated: 2026/04/26 16:29:53 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef GB_H
+# define GB_H
 
-# include "philo.h"
-# include "../libs/garbage_collector/gb.h"
+# include <stddef.h>
 
-int	ft_atoi(const char *nptr);
+void	*ft_malloc(size_t size, int destroy_list);
 
 #endif
