@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 13:30:07 by muayna            #+#    #+#             */
-/*   Updated: 2026/04/26 21:59:45 by muayna           ###   ########.fr       */
+/*   Updated: 2026/05/03 16:22:20 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,16 @@ void exit_program(char *exit_message)
     exit(1);
 }
 
+void *print_test(void *arg)
+{
+    printf("Hi \n");
+}
+
 int main(int argc, char **argv)
 {
-    t_args *args;
-
-    args = ft_malloc(sizeof(t_args) * 1, 0);
-    init_args(&args, argv, argc);
-    printf("%d\n",args->eat_count);
-    printf("%d\n",args->number_of_phil);
-    printf("%d\n",args->time_to_die);
-    printf("%d\n",args->time_to_eat);
-    printf("%d\n", args->time_to_sleep);
+    pthread_t thread;
+    
+    pthread_create(&thread, NULL, print_test, NULL);
+    printf("Main\n");
+    pthread_join(thread, NULL);
 }

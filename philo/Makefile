@@ -6,7 +6,7 @@
 #    By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/26 16:11:09 by muayna            #+#    #+#              #
-#    Updated: 2026/04/26 16:51:33 by muayna           ###   ########.fr        #
+#    Updated: 2026/05/03 16:22:53 by muayna           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = philo
 SRCS = sources/init.c sources/main.c sources/monitor.c sources/routine.c sources/utils.c
 
 OBJS = $(SRCS:.c=.o)
-CC = -Wall -Wextra -Werror -includes 
+CC = -Wall -Wextra -Werror -includes  -lpthread
 GB = libs/garbage_collector
 GB_LIB = $(GB)/libgb.a
 
