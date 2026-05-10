@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 13:30:16 by muayna            #+#    #+#             */
-/*   Updated: 2026/05/10 16:34:56 by muayna           ###   ########.fr       */
+/*   Updated: 2026/05/10 16:53:50 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_philo
     long long right_fork;
     long long left_fork;
     t_global_data *data;
+    pthread_mutex_t safe_lock;
 }t_philo;
 
 
