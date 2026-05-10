@@ -12,7 +12,7 @@
 
 #include "../includes/philo.h"
 
-void isbiggerint(char **argv)
+static void isbiggerint(char **argv)
 {
     unsigned long i;
 
@@ -27,7 +27,7 @@ void isbiggerint(char **argv)
     }
 }
 
-void check_all_digit(char **argv, int argc)
+static void check_all_digit(char **argv, int argc)
 {
     unsigned int i;
     unsigned int a;
@@ -47,7 +47,7 @@ void check_all_digit(char **argv, int argc)
     }
 }
 
-void check_error(char **argv, int argc)
+static void check_error(char **argv, int argc)
 {
     if(argc != 5 && argc != 6)
         exit_program("Missing or excessive values ​​were entered.");
@@ -58,7 +58,7 @@ void check_error(char **argv, int argc)
 void init_args(t_args **args_list, char **argv, int argc)
 {
     check_error(argv, argc);
-    (*args_list)->number_of_phil = ft_atoi(argv[1]);
+    (*args_list)->number_of_philo = ft_atoi(argv[1]);
     (*args_list)->time_to_die = ft_atoi(argv[2]);
     (*args_list)->time_to_eat = ft_atoi(argv[3]);
     (*args_list)->time_to_sleep = ft_atoi(argv[4]);

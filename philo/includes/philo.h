@@ -28,11 +28,11 @@ Others value is requaried, Must not empty.
 
 typedef struct s_args
 {
-    long number_of_phil;
-    long time_to_die;
-    long time_to_eat;
-    long time_to_sleep;
-    long eat_count;
+    long long number_of_philo;
+    long long time_to_die;
+    long long time_to_eat;
+    long long time_to_sleep;
+    long long eat_count;
 }t_args;
 
 
@@ -59,7 +59,7 @@ typedef struct s_global_data
     pthread_mutex_t *forks;
     pthread_mutex_t dead_mutex;
     pthread_mutex_t print_mutex;
-    
+    t_philo *philos;
 }t_global_data;
 
 

@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME = philo
-SRCS = sources/init.c sources/main.c sources/monitor.c sources/routine.c sources/utils.c
+SRCS = sources/init.c sources/main.c sources/monitor.c sources/routine.c sources/utils.c sources/init_philo.c
 
 OBJS = $(SRCS:.c=.o)
 CC = -Wall -Wextra -Werror -includes  -lpthread
