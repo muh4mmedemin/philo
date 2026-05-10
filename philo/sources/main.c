@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 13:30:07 by muayna            #+#    #+#             */
-/*   Updated: 2026/05/10 16:26:39 by muayna           ###   ########.fr       */
+/*   Updated: 2026/05/10 16:35:08 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,5 @@ int main(int argc, char **argv)
 
     user_input_list = ft_malloc((sizeof(t_args)), 0);
     init_args(&user_input_list, argv, argc);
+    init_philo(user_input_list);
 }

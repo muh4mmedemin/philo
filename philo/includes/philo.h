@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 13:30:16 by muayna            #+#    #+#             */
-/*   Updated: 2026/05/03 13:56:45 by muayna           ###   ########.fr       */
+/*   Updated: 2026/05/10 16:34:56 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct s_global_data
 
 void init_args(t_args **args_list, char **argv, int argc);
 void exit_program(char *exit_message);
+t_global_data *init_philo(t_args *user_input);
 
 #endif
 
