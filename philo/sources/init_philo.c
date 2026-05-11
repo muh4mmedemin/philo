@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 16:26:26 by muayna            #+#    #+#             */
-/*   Updated: 2026/05/11 16:39:26 by muayna           ###   ########.fr       */
+/*   Updated: 2026/05/11 16:54:06 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,20 @@ t_global_data *init_philo(t_args *user_input)
     global_data->is_dead = 0;
     global_data->user_args = user_input;
     global_data->fork = ft_malloc(sizeof(pthread_mutex_t) * user_input->number_of_philo, 0);
+
+
+    
+    /*
+        INIT MUTEXT
+    */
+   	int c = 0;
+   	pthread_mutex_init(&global_data->print_mutex,NULL);
+	pthread_mutex_init(&global_data->dead_mutex,NULL);
+   	while(c < user_input->number_of_philo)
+	{
+		pthread_mutex_init(&global_data->fork[i],NULL);
+		c++;
+	}
     global_data->philos = ft_malloc((sizeof(t_philo) * user_input->number_of_philo), 0);
     while(i < user_input->number_of_philo)
     {
