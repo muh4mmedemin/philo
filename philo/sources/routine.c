@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 15:35:09 by muayna            #+#    #+#             */
-/*   Updated: 2026/05/11 16:49:31 by muayna           ###   ########.fr       */
+/*   Updated: 2026/05/11 17:12:48 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void take_fork(t_philo *philo)
 	pthread_mutex_lock(&philo->data->fork[philo->right_fork]);
 	pthread_mutex_lock(&philo->data->print_mutex);
 	printf("MS %d taken a fork\n", (philo->id + 1));
+	pthread_mutex_unlock(&philo->data->fork[philo->right_fork]);
+	pthread_mutex_unlock(&philo->data->fork[philo->left_fork]);
 	pthread_mutex_unlock(&philo->data->print_mutex);
 }
 
