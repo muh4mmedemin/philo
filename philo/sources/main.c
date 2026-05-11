@@ -6,12 +6,11 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 13:30:07 by muayna            #+#    #+#             */
-/*   Updated: 2026/05/11 16:25:12 by muayna           ###   ########.fr       */
+/*   Updated: 2026/05/11 17:14:02 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
-#include "limits.h"
 
 void exit_program(char *exit_message)
 {
