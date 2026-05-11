@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 16:04:13 by muayna            #+#    #+#             */
-/*   Updated: 2026/04/26 21:51:47 by muayna           ###   ########.fr       */
+/*   Updated: 2026/05/11 16:24:58 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ size_t	ft_strlen(const char *s)
 {
 	int	i;
 
+	if(s == NULL)
+		return 0;
 	i = 0;
 	while (s[i])
 		i++;

@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 13:30:16 by muayna            #+#    #+#             */
-/*   Updated: 2026/05/11 15:41:40 by muayna           ###   ########.fr       */
+/*   Updated: 2026/05/11 16:30:19 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct s_global_data
     long long start_time;
     long long is_dead;
     pthread_t *philo_id_numbers;
-    pthread_mutex_t *forks;
+    pthread_mutex_t *fork;
     pthread_mutex_t dead_mutex;
     pthread_mutex_t print_mutex;
     t_philo *philos;
