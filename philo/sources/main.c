@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 13:30:07 by muayna            #+#    #+#             */
-/*   Updated: 2026/05/10 16:35:08 by muayna           ###   ########.fr       */
+/*   Updated: 2026/05/11 15:52:51 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,16 @@ void exit_program(char *exit_message)
 int main(int argc, char **argv)
 {
     t_args *user_input_list;
+    t_global_data *global_data;
+    int i;
 
-    user_input_list = ft_malloc((sizeof(t_args)), 0);
-    init_args(&user_input_list, argv, argc);
-    init_philo(user_input_list);
+    i = 0;
+    user_input_list = init_args(argv, argc);
+    global_data = init_philo(user_input_list);
+    create_philo(global_data);
+    while(i < global_data->user_args->number_of_philo)
+    {
+        pthread_join(global_data->philo_id_numbers[i], NULL);
+        i++;
+    }
 }
