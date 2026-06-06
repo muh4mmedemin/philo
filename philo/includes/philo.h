@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 13:30:16 by muayna            #+#    #+#             */
-/*   Updated: 2026/06/06 11:35:38 by muayna           ###   ########.fr       */
+/*   Updated: 2026/06/06 12:13:44 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ t_args *init_args(char **argv, int argc);
 t_global_data *init_philo(t_args *user_input);
 void create_philo(t_global_data *global_data);
 unsigned long long calculate_timestep(t_global_data *global_data, t_philo *philo);
+void *check_philo_health(void *arg);
 
 #endif
 

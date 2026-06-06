@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 15:35:09 by muayna            #+#    #+#             */
-/*   Updated: 2026/06/06 11:47:39 by muayna           ###   ########.fr       */
+/*   Updated: 2026/06/06 12:35:11 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ void sleep_philo(t_philo *philo)
 
 void eat_meal(t_philo *philo)
 {
+	pthread_mutex_lock(&philo->safe_lock);
+	philo->last_meal = calculate_timestep(philo->data, philo);
+	pthread_mutex_unlock(&philo->safe_lock);
 	pthread_mutex_lock(&philo->data->print_mutex);
 	printf("%zu %d is eating\n",calculate_timestep(philo->data, philo), (philo->id));
 	pthread_mutex_unlock(&philo->data->print_mutex);

@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 13:30:07 by muayna            #+#    #+#             */
-/*   Updated: 2026/06/06 11:23:50 by muayna           ###   ########.fr       */
+/*   Updated: 2026/06/06 12:47:15 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int main(int argc, char **argv)
 {
     t_args *user_input_list;
     t_global_data *global_data;
+    pthread_t monitor;
     int i;
 
     i = 0;
@@ -42,6 +43,7 @@ int main(int argc, char **argv)
     global_data = init_philo(user_input_list);
     gettimeofday(&global_data->app_start_time, NULL);
     create_philo(global_data);
+    pthread_create(&monitor, NULL, check_philo_health, global_data);
     while(i < global_data->user_args->number_of_philo)
     {
         pthread_join(global_data->philo_id_numbers[i], NULL);
