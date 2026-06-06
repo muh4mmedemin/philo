@@ -6,31 +6,51 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 15:35:09 by muayna            #+#    #+#             */
-/*   Updated: 2026/06/06 11:24:09 by muayna           ###   ########.fr       */
+/*   Updated: 2026/06/06 11:47:39 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
+void sleep_philo(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->data->print_mutex);
+	printf("%zu %d is sleeping\n",calculate_timestep(philo->data, philo), (philo->id));
+	pthread_mutex_unlock(&philo->data->print_mutex);
+	usleep(philo->data->user_args->time_to_sleep * 1000);
+}
+
+void eat_meal(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->data->print_mutex);
+	printf("%zu %d is eating\n",calculate_timestep(philo->data, philo), (philo->id));
+	pthread_mutex_unlock(&philo->data->print_mutex);
+	usleep(philo->data->user_args->time_to_eat * 1000);
+	pthread_mutex_unlock(&philo->data->fork[philo->left_fork]);
+	pthread_mutex_unlock(&philo->data->fork[philo->right_fork]);
+}
+
 void take_fork(t_philo *philo)
 {
+	printf("%zu %d is thinking\n",calculate_timestep(philo->data, philo), (philo->id));
 	pthread_mutex_lock(&philo->data->fork[philo->left_fork]);
 	pthread_mutex_lock(&philo->data->print_mutex);
-	printf("%d MS %d taken a fork\n",calculate_timestep(philo->data, philo), (philo->id));
-	pthread_mutex_unlock(&philo->data->fork[philo->left_fork]);
+	printf("%zu %d has taken a fork\n",calculate_timestep(philo->data, philo), (philo->id));
 	pthread_mutex_unlock(&philo->data->print_mutex);
 	pthread_mutex_lock(&philo->data->fork[philo->right_fork]);
 	pthread_mutex_lock(&philo->data->print_mutex);
-	printf("%d MS %d taken a fork\n",calculate_timestep(philo->data, philo), (philo->id));
-	pthread_mutex_unlock(&philo->data->fork[philo->right_fork]);
+	printf("%zu %d has taken a fork\n",calculate_timestep(philo->data, philo), (philo->id));
 	pthread_mutex_unlock(&philo->data->print_mutex);
 }
 
 void *routuine(void *arg)
 {
 	if(((t_philo*)arg)->id % 2 != 0)
-		usleep(2000000);
+		usleep(200);
 	take_fork((t_philo*)arg);
+	eat_meal((t_philo*)arg);
+	sleep_philo((t_philo*)arg);
+	routuine(arg);
 }
 
 void create_philo(t_global_data *global_data)

@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 16:04:13 by muayna            #+#    #+#             */
-/*   Updated: 2026/05/11 16:24:58 by muayna           ###   ########.fr       */
+/*   Updated: 2026/06/06 11:27:52 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,11 @@ int	ft_isdigit(int c)
 		return (1);
 	else
 		return (0);
+}
+
+void write_str(char *str)
+{
+	if (str == NULL)
+		return ;
+	write(1, str, ft_strlen(str));
 }
