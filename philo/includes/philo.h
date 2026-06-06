@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 13:30:16 by muayna            #+#    #+#             */
-/*   Updated: 2026/05/11 17:09:28 by muayna           ###   ########.fr       */
+/*   Updated: 2026/06/06 11:21:47 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "pthread.h"
 # include <unistd.h>
 # include "utils.h"
-
+#include <sys/time.h>
 /*
 eat_count value is a optinal value, it can be empty.
 Others value is requaried, Must not empty.
@@ -42,10 +42,11 @@ typedef struct s_global_data t_global_data;
 typedef struct s_philo
 {
     long long id;
-    long long last_meal;
+    unsigned long long last_meal;
     long long eat_count;
     long long right_fork;
     long long left_fork;
+    unsigned long long take_fork_time;
     t_global_data *data;
     pthread_mutex_t safe_lock;
 }t_philo;
@@ -54,8 +55,9 @@ typedef struct s_philo
 typedef struct s_global_data
 {
     t_args *user_args;
-    long long start_time;
-    long long is_dead;
+    struct timeval app_start_time;
+    //long long start_time;
+    int is_dead;
     pthread_t *philo_id_numbers;
     pthread_mutex_t *fork;
     pthread_mutex_t dead_mutex;
@@ -67,6 +69,7 @@ void exit_program(char *exit_message);
 t_args *init_args(char **argv, int argc);
 t_global_data *init_philo(t_args *user_input);
 void create_philo(t_global_data *global_data);
+unsigned long long calculate_timestep(t_global_data *global_data, t_philo *philo);
 
 #endif
 

@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 16:26:26 by muayna            #+#    #+#             */
-/*   Updated: 2026/05/11 16:59:47 by muayna           ###   ########.fr       */
+/*   Updated: 2026/06/06 11:21:11 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_global_data *init_philo(t_args *user_input)
     i = 0;
     global_data = ft_malloc(sizeof(t_global_data), 0);
     global_data->philo_id_numbers = ft_malloc(sizeof(pthread_t) * user_input->number_of_philo, 0);
-    global_data->start_time = 0;
+    //global_data->start_time = 0;
     global_data->is_dead = 0;
     global_data->user_args = user_input;
     global_data->fork = ft_malloc(sizeof(pthread_mutex_t) * user_input->number_of_philo, 0);
