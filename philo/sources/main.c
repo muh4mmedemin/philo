@@ -6,13 +6,13 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 13:30:07 by muayna            #+#    #+#             */
-/*   Updated: 2026/06/06 12:47:15 by muayna           ###   ########.fr       */
+/*   Updated: 2026/06/07 21:30:34 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-unsigned long long calculate_timestep(t_global_data *global_data, t_philo *philo)
+unsigned long long calculate_timestep(t_global_data *global_data)
 {
     struct timeval current_time;
     unsigned long long time_ms;

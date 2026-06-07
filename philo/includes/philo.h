@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 13:30:16 by muayna            #+#    #+#             */
-/*   Updated: 2026/06/06 12:13:44 by muayna           ###   ########.fr       */
+/*   Updated: 2026/06/07 21:30:41 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ eat_count value is a optinal value, it can be empty.
 Others value is requaried, Must not empty.
 */
 
+enum philo_state{
+    THINK,
+    EAT,
+    SLEEP
+};
 
 typedef struct s_args
 {
@@ -69,8 +74,9 @@ void exit_program(char *exit_message);
 t_args *init_args(char **argv, int argc);
 t_global_data *init_philo(t_args *user_input);
 void create_philo(t_global_data *global_data);
-unsigned long long calculate_timestep(t_global_data *global_data, t_philo *philo);
+unsigned long long calculate_timestep(t_global_data *global_data);
 void *check_philo_health(void *arg);
+int anyone_dead(t_philo *philo);
 
 #endif
 

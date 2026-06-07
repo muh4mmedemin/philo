@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 13:29:50 by muayna            #+#    #+#             */
-/*   Updated: 2026/06/06 12:41:45 by muayna           ###   ########.fr       */
+/*   Updated: 2026/06/07 21:30:22 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void check_all_digit(char **argv, int argc)
 
     a = 1;
     i = 0;
-    while(a != argc)
+    while(a != (unsigned int)argc)
     {
         i = 0;
         while(argv[a][i])

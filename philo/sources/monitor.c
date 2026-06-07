@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 16:25:03 by muayna            #+#    #+#             */
-/*   Updated: 2026/06/06 13:14:33 by muayna           ###   ########.fr       */
+/*   Updated: 2026/06/07 21:31:42 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,15 @@ void *check_philo_health(void *arg)
         pthread_mutex_lock(&data->philos[i].safe_lock);
         last_meal = data->philos[i].last_meal;
         pthread_mutex_unlock(&data->philos[i].safe_lock);
-        test = calculate_timestep(data, &data->philos[i]);
+        test = calculate_timestep(data);
         s = test - last_meal;
         if (s > kill_time)
         {
+            pthread_mutex_lock(&data->dead_mutex);
             data->is_dead = 1;
+            pthread_mutex_unlock(&data->dead_mutex);
             pthread_mutex_lock(&data->print_mutex);
-	        printf("%zu %d died\n",calculate_timestep(data, &data->philos[i]), (i));
+            print_str(calculate_timestep(data), i, "died");
             pthread_mutex_unlock(&data->print_mutex);
             break;
         }
@@ -47,4 +49,5 @@ void *check_philo_health(void *arg)
         else
             i++;
     }
+    return NULL;
 }

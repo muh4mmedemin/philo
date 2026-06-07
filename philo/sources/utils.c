@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 16:04:13 by muayna            #+#    #+#             */
-/*   Updated: 2026/06/06 12:42:09 by muayna           ###   ########.fr       */
+/*   Updated: 2026/06/07 21:33:40 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,40 @@ int	ft_isdigit(int c)
 		return (0);
 }
 
-void write_str(char *str)
+void print_str(unsigned long long time_step, long long philo_id, char *message)
 {
-	if (str == NULL)
+	if (message == NULL)
 		return ;
-	write(1, str, ft_strlen(str));
+	philo_id++;
+	printf("%llu %lld %s\n",time_step, philo_id, message);
+	return ;
+}
+
+int ft_usleep(unsigned long long sleep_time_ms, t_philo *philo, int philo_routine)
+{
+	unsigned long long current_time;
+	unsigned long long start_time;
+	struct timeval time;
+
+	gettimeofday(&time, NULL);
+	start_time = (time.tv_sec * 1000ULL) + (time.tv_usec / 1000);
+	current_time = start_time;
+
+	while((current_time - start_time) < sleep_time_ms)
+	{
+		if(anyone_dead(philo))
+		{
+			if(philo_routine == EAT)
+			{
+				pthread_mutex_unlock(&philo->data->fork[philo->left_fork]);
+				pthread_mutex_unlock(&philo->data->fork[philo->right_fork]);
+				return 1;
+			}
+			return 1;
+		}
+		gettimeofday(&time, NULL);
+		current_time = (time.tv_sec * 1000ULL) + (time.tv_usec / 1000);
+		usleep(300);
+	}
+	return 0;
 }
