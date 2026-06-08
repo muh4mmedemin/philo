@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 16:04:13 by muayna            #+#    #+#             */
-/*   Updated: 2026/06/07 21:33:40 by muayna           ###   ########.fr       */
+/*   Updated: 2026/06/08 23:30:44 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void print_str(unsigned long long time_step, long long philo_id, char *message)
 	return ;
 }
 
-int ft_usleep(unsigned long long sleep_time_ms, t_philo *philo, int philo_routine)
+int ft_usleep(unsigned long long sleep_time_ms, t_philo *philo)
 {
 	unsigned long long current_time;
 	unsigned long long start_time;
@@ -82,12 +82,6 @@ int ft_usleep(unsigned long long sleep_time_ms, t_philo *philo, int philo_routin
 	{
 		if(anyone_dead(philo))
 		{
-			if(philo_routine == EAT)
-			{
-				pthread_mutex_unlock(&philo->data->fork[philo->left_fork]);
-				pthread_mutex_unlock(&philo->data->fork[philo->right_fork]);
-				return 1;
-			}
 			return 1;
 		}
 		gettimeofday(&time, NULL);

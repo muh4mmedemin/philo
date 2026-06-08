@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 15:35:09 by muayna            #+#    #+#             */
-/*   Updated: 2026/06/08 21:39:25 by muayna           ###   ########.fr       */
+/*   Updated: 2026/06/08 23:31:59 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int sleep_philo(t_philo *philo)
 	}
 	print_str(calculate_timestep(philo->data), philo->id, "is sleeping");
 	pthread_mutex_unlock(&philo->data->print_mutex);
-	if (ft_usleep(philo->data->user_args->time_to_sleep, philo, SLEEP))
+	if (ft_usleep(philo->data->user_args->time_to_sleep, philo))
 		return 1;
 	return 0;
 }
@@ -54,8 +54,16 @@ int eat_meal(t_philo *philo)
 	}
 	print_str(calculate_timestep(philo->data), philo->id, "is eating");
 	pthread_mutex_unlock(&philo->data->print_mutex);
-	if(ft_usleep(philo->data->user_args->time_to_eat, philo, EAT))
+	pthread_mutex_lock(&philo->safe_lock);
+	if(philo->data->user_args->eat_count != -1)
+		philo->eat_count += 1;
+	pthread_mutex_unlock(&philo->safe_lock);
+	if(ft_usleep(philo->data->user_args->time_to_eat, philo))
+	{
+		pthread_mutex_unlock(&philo->data->fork[philo->left_fork]);
+		pthread_mutex_unlock(&philo->data->fork[philo->right_fork]);		
 		return 1;
+	}
 	pthread_mutex_unlock(&philo->data->fork[philo->left_fork]);
 	pthread_mutex_unlock(&philo->data->fork[philo->right_fork]);
 	return 0;

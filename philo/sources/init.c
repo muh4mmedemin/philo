@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 13:29:50 by muayna            #+#    #+#             */
-/*   Updated: 2026/06/07 21:30:22 by muayna           ###   ########.fr       */
+/*   Updated: 2026/06/08 23:47:43 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,15 @@ static void isbiggerint(char **argv)
 {
     unsigned long i;
 
-    i = 0;
+    i = 1;
     while(argv[i])
     {
         if(ft_strlen(argv[i]) > 10)
             exit_program("Max Int Value");
         else if(ft_atoi(argv[i]) > 2147483647)
             exit_program("Max Int Value");
+        else if (ft_atoi(argv[i]) == 0)
+            exit_program("You can't just type ZERO!!! FİX IN NOW!!");
         i++;
     }
 }

@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 16:25:03 by muayna            #+#    #+#             */
-/*   Updated: 2026/06/08 16:52:27 by muayna           ###   ########.fr       */
+/*   Updated: 2026/06/08 23:41:18 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 void *check_philo_health(void *arg)
 {
     int i = 0;
+    int b = 0;
     unsigned long long test;
     unsigned long long s;
     unsigned long long kill_time;
@@ -28,6 +29,34 @@ void *check_philo_health(void *arg)
     {
         usleep(200);
         s = 0;
+        if (data->user_args->eat_count != -1)
+        {
+            b = 0;
+            while(b <= (data->user_args->number_of_philo - 1))
+            {
+                usleep(1000);
+                if (b == data->user_args->number_of_philo - 1)
+                {
+                    pthread_mutex_lock(&data->dead_mutex);
+                    data->is_dead = 1;
+                    pthread_mutex_unlock(&data->dead_mutex);
+                    break ;
+                }
+                pthread_mutex_lock(&data->philos[b].safe_lock);
+                if(data->philos[b].eat_count >= data->user_args->eat_count)
+                {
+                    pthread_mutex_unlock(&data->philos[b].safe_lock);
+                    b++;
+                }
+                else
+                {
+                    pthread_mutex_unlock(&data->philos[b].safe_lock);
+                    break ;
+                }
+            }
+        }
+        if (anyone_dead(&data->philos[i]))
+            break ;
         pthread_mutex_lock(&data->philos[i].safe_lock);
         last_meal = data->philos[i].last_meal;
         pthread_mutex_unlock(&data->philos[i].safe_lock);
