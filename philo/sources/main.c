@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 13:30:07 by muayna            #+#    #+#             */
-/*   Updated: 2026/06/07 21:30:34 by muayna           ###   ########.fr       */
+/*   Updated: 2026/06/08 21:32:57 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ unsigned long long calculate_timestep(t_global_data *global_data)
 
 void exit_program(char *exit_message)
 {
-    printf("%s\n", exit_message);
+    if (exit_message != NULL)
+        printf("%s\n", exit_message);
     ft_malloc(1, 1);
     exit(1);
 }
@@ -49,4 +50,6 @@ int main(int argc, char **argv)
         pthread_join(global_data->philo_id_numbers[i], NULL);
         i++;
     }
+    pthread_join(monitor, NULL);
+    ft_malloc(1, 1);
 }
