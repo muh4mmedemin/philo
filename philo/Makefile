@@ -6,12 +6,12 @@
 #    By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/26 16:11:09 by muayna            #+#    #+#              #
-#    Updated: 2026/06/09 22:06:10 by muayna           ###   ########.fr        #
+#    Updated: 2026/06/09 22:34:54 by muayna           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
-SRCS = sources/init.c sources/main.c sources/monitor.c sources/routine.c sources/utils.c sources/init_philo.c
+SRCS = sources/init.c sources/main.c sources/monitor.c sources/routine.c sources/utils.c sources/init_philo.c sources/routine2.c
 
 OBJS = $(SRCS:.c=.o)
 GB = libs/garbage_collector

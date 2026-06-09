@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 13:30:16 by muayna            #+#    #+#             */
-/*   Updated: 2026/06/09 21:52:04 by muayna           ###   ########.fr       */
+/*   Updated: 2026/06/09 22:37:00 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,10 @@ void				create_philo(t_global_data *global_data);
 unsigned long long	calculate_timestep(t_global_data *global_data);
 void				*check_philo_health(void *arg);
 int					anyone_dead(t_philo *philo);
+int					take_fork(t_philo *philo);
+int					eat_meal(t_philo *philo);
+void				*routuine(void *arg);
+int					one_philo_handle(t_philo *philo);
+void				lock_mutexes(pthread_mutex_t *first, pthread_mutex_t *sec);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 16:26:26 by muayna            #+#    #+#             */
-/*   Updated: 2026/06/09 22:00:59 by muayna           ###   ########.fr       */
+/*   Updated: 2026/06/09 22:37:10 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,17 @@ t_global_data	*init_philo(t_args *user_input)
 		i++;
 	}
 	return (global_data);
+}
+
+void	create_philo(t_global_data *global_data)
+{
+	int	i;
+
+	i = 0;
+	while (i < global_data->user_args->number_of_philo)
+	{
+		pthread_create(&global_data->philo_id_numbers[i], NULL, routuine,
+			&global_data->philos[i]);
+		i++;
+	}
 }

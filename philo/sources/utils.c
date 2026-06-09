@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 16:04:13 by muayna            #+#    #+#             */
-/*   Updated: 2026/06/08 23:30:44 by muayna           ###   ########.fr       */
+/*   Updated: 2026/06/09 22:30:44 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ size_t	ft_strlen(const char *s)
 {
 	int	i;
 
-	if(s == NULL)
-		return 0;
+	if (s == NULL)
+		return (0);
 	i = 0;
 	while (s[i])
 		i++;
@@ -59,34 +59,34 @@ int	ft_isdigit(int c)
 		return (0);
 }
 
-void print_str(unsigned long long time_step, long long philo_id, char *message)
+void	print_str(unsigned long long time_step, long long philo_id,
+		char *message)
 {
 	if (message == NULL)
 		return ;
 	philo_id++;
-	printf("%llu %lld %s\n",time_step, philo_id, message);
+	printf("%llu %lld %s\n", time_step, philo_id, message);
 	return ;
 }
 
-int ft_usleep(unsigned long long sleep_time_ms, t_philo *philo)
+int	ft_usleep(unsigned long long sleep_time_ms, t_philo *philo)
 {
-	unsigned long long current_time;
-	unsigned long long start_time;
-	struct timeval time;
+	unsigned long long	current_time;
+	unsigned long long	start_time;
+	struct timeval		time;
 
 	gettimeofday(&time, NULL);
 	start_time = (time.tv_sec * 1000ULL) + (time.tv_usec / 1000);
 	current_time = start_time;
-
-	while((current_time - start_time) < sleep_time_ms)
+	while ((current_time - start_time) < sleep_time_ms)
 	{
-		if(anyone_dead(philo))
+		if (anyone_dead(philo))
 		{
-			return 1;
+			return (1);
 		}
 		gettimeofday(&time, NULL);
 		current_time = (time.tv_sec * 1000ULL) + (time.tv_usec / 1000);
 		usleep(300);
 	}
-	return 0;
+	return (0);
 }
