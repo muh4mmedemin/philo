@@ -6,13 +6,26 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 16:26:26 by muayna            #+#    #+#             */
-/*   Updated: 2026/06/08 22:22:43 by muayna           ###   ########.fr       */
+/*   Updated: 2026/06/09 21:13:59 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void init_mutex(t_global_data **source)
+
+static int init_global_data(t_global_data **data, t_args **user_input)
+{
+	(*data)->philo_id_numbers = ft_malloc(sizeof(pthread_t) * (*user_input)->number_of_philo, 0);
+	(*data)->is_dead = 0;
+    (*data)->user_args = (*user_input);
+    (*data)->fork = ft_malloc(sizeof(pthread_mutex_t) * (*user_input)->number_of_philo, 0);
+    (*data)->philos = ft_malloc((sizeof(t_philo) * (*user_input)->number_of_philo), 0);
+	if ((*data)->philos == NULL || (*data)->fork == NULL || (*data)->philo_id_numbers == NULL)
+		return 1;
+	return 0;
+}
+
+static void init_mutex(t_global_data **source)
 {
 	int i;
 
@@ -33,12 +46,8 @@ t_global_data *init_philo(t_args *user_input)
 
     i = 0;
     global_data = ft_malloc(sizeof(t_global_data), 0);
-    global_data->philo_id_numbers = ft_malloc(sizeof(pthread_t) * user_input->number_of_philo, 0);
-    //global_data->start_time = 0;
-    global_data->is_dead = 0;
-    global_data->user_args = user_input;
-    global_data->fork = ft_malloc(sizeof(pthread_mutex_t) * user_input->number_of_philo, 0);
-    global_data->philos = ft_malloc((sizeof(t_philo) * user_input->number_of_philo), 0);
+	if(init_global_data(&global_data, &user_input))
+		exit_program("MALLOC ERROR!");
 	init_mutex(&global_data);
     while(i < user_input->number_of_philo)
     {

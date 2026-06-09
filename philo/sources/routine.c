@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 15:35:09 by muayna            #+#    #+#             */
-/*   Updated: 2026/06/09 19:47:19 by muayna           ###   ########.fr       */
+/*   Updated: 2026/06/09 19:54:55 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 int one_philo_handle(t_philo *philo)
 {
-	if (ft_usleep(philo->data->user_args->time_to_die + 3, philo))
+	if (philo->data->user_args->number_of_philo == 1)
 	{
-		return 1;
+		if (ft_usleep(philo->data->user_args->time_to_die + 3, philo))
+		{
+			return 1;
+		}	
 	}
 	return 0;
 }
