@@ -6,7 +6,7 @@
 #    By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/26 16:11:09 by muayna            #+#    #+#              #
-#    Updated: 2026/06/09 21:13:18 by muayna           ###   ########.fr        #
+#    Updated: 2026/06/09 22:06:10 by muayna           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ GB = libs/garbage_collector
 GB_LIB = $(GB)/libgb.a
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -Iincludes -Ilibs/garbage_collector -fsanitize=thread -g
+CFLAGS = -Wall -Wextra -Werror -Iincludes -Ilibs/garbage_collector #-fsanitize=thread -g
 RM = rm -rf
 
 all: $(GB_LIB) $(NAME)

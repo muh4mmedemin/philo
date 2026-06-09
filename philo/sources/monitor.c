@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 16:25:03 by muayna            #+#    #+#             */
-/*   Updated: 2026/06/09 21:12:24 by muayna           ###   ########.fr       */
+/*   Updated: 2026/06/09 22:06:59 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int opearate_philo_dead(t_global_data **data, unsigned long long kill_time, unsi
 	s = test - last_meal;
 	if (s > kill_time)
 	{
+		printf("sa\n");
 		pthread_mutex_lock(&(*data)->dead_mutex);
 		(*data)->is_dead = 1;
 		pthread_mutex_unlock(&(*data)->dead_mutex);
