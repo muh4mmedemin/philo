@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 15:35:09 by muayna            #+#    #+#             */
-/*   Updated: 2026/06/09 19:54:55 by muayna           ###   ########.fr       */
+/*   Updated: 2026/06/09 21:39:25 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,18 @@ int sleep_philo(t_philo *philo)
 	return 0;
 }
 
+void unlock_mutexes(pthread_mutex_t *first, pthread_mutex_t *sec, pthread_mutex_t *third, pthread_mutex_t *forth)
+{
+	if(first != NULL)
+		pthread_mutex_unlock(first);
+	if(sec != NULL)
+		pthread_mutex_unlock(sec);
+	if(third != NULL)
+		pthread_mutex_unlock(third);
+	if(forth != NULL)
+		pthread_mutex_unlock(forth);
+}
+
 int eat_meal(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->safe_lock);
@@ -59,9 +71,7 @@ int eat_meal(t_philo *philo)
 	pthread_mutex_lock(&philo->data->print_mutex);
 	if (anyone_dead(philo))
 	{
-		pthread_mutex_unlock(&philo->data->fork[philo->left_fork]);
-		pthread_mutex_unlock(&philo->data->fork[philo->right_fork]);
-		pthread_mutex_unlock(&philo->data->print_mutex);
+		unlock_mutexes(&philo->data->fork[philo->left_fork], &philo->data->fork[philo->right_fork], &philo->data->print_mutex, NULL);
 		return 1 ;
 	}
 	print_str(calculate_timestep(philo->data), philo->id, "is eating");
@@ -72,13 +82,26 @@ int eat_meal(t_philo *philo)
 	pthread_mutex_unlock(&philo->safe_lock);
 	if(ft_usleep(philo->data->user_args->time_to_eat, philo))
 	{
-		pthread_mutex_unlock(&philo->data->fork[philo->left_fork]);
-		pthread_mutex_unlock(&philo->data->fork[philo->right_fork]);		
+		unlock_mutexes(&philo->data->fork[philo->left_fork], &philo->data->fork[philo->right_fork], NULL, NULL);
 		return 1;
 	}
-	pthread_mutex_unlock(&philo->data->fork[philo->left_fork]);
-	pthread_mutex_unlock(&philo->data->fork[philo->right_fork]);
+	unlock_mutexes(&philo->data->fork[philo->left_fork], &philo->data->fork[philo->right_fork], NULL, NULL);
 	return 0;
+}
+
+static void init_fork_variable(long long *first_fork, long long *sec_fork, t_philo *philo)
+{
+	if (philo->id % 2 != 0)
+	{
+		(*first_fork) = philo->left_fork;
+		(*sec_fork) = philo->right_fork;
+		usleep(2000);
+	}
+	else
+	{
+		(*first_fork) = philo->right_fork;
+		(*sec_fork) = philo->left_fork;
+	}
 }
 
 int take_fork(t_philo *philo)
@@ -86,23 +109,12 @@ int take_fork(t_philo *philo)
 	long long first_fork;
 	long long sec_fork;
 
-	if (philo->id % 2 != 0)
-	{
-		first_fork = philo->left_fork;
-		sec_fork = philo->right_fork;
-		usleep(2000);
-	}
-	else
-	{
-		first_fork = philo->right_fork;
-		sec_fork = philo->left_fork;
-	}
+	init_fork_variable(&first_fork, &sec_fork, philo);
 	pthread_mutex_lock(&philo->data->fork[first_fork]);
 	pthread_mutex_lock(&philo->data->print_mutex);
 	if (anyone_dead(philo))
 	{
-		pthread_mutex_unlock(&philo->data->fork[first_fork]);
-		pthread_mutex_unlock(&philo->data->print_mutex);
+		unlock_mutexes(&philo->data->fork[first_fork], NULL, &philo->data->print_mutex, NULL);
 		return 1;
 	}
 	print_str(calculate_timestep(philo->data), philo->id, "has taken a fork");
@@ -113,9 +125,7 @@ int take_fork(t_philo *philo)
 	pthread_mutex_lock(&philo->data->print_mutex);
 	if (anyone_dead(philo))
 	{
-		pthread_mutex_unlock(&philo->data->fork[sec_fork]);
-		pthread_mutex_unlock(&philo->data->fork[first_fork]);
-		pthread_mutex_unlock(&philo->data->print_mutex);
+		unlock_mutexes(&philo->data->fork[first_fork], &philo->data->fork[sec_fork], &philo->data->print_mutex, NULL);
 		return 1;
 	}
 	print_str(calculate_timestep(philo->data), philo->id, "has taken a fork");
