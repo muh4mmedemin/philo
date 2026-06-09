@@ -6,11 +6,20 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 15:35:09 by muayna            #+#    #+#             */
-/*   Updated: 2026/06/08 23:31:59 by muayna           ###   ########.fr       */
+/*   Updated: 2026/06/09 19:47:19 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
+int one_philo_handle(t_philo *philo)
+{
+	if (ft_usleep(philo->data->user_args->time_to_die + 3, philo))
+	{
+		return 1;
+	}
+	return 0;
+}
 
 int anyone_dead(t_philo *philo)
 {
@@ -95,6 +104,8 @@ int take_fork(t_philo *philo)
 	}
 	print_str(calculate_timestep(philo->data), philo->id, "has taken a fork");
 	pthread_mutex_unlock(&philo->data->print_mutex);
+	if(one_philo_handle(philo))
+		return 1;
 	pthread_mutex_lock(&philo->data->fork[sec_fork]);
 	pthread_mutex_lock(&philo->data->print_mutex);
 	if (anyone_dead(philo))
