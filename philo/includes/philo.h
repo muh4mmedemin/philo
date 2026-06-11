@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 13:30:16 by muayna            #+#    #+#             */
-/*   Updated: 2026/06/09 22:37:00 by muayna           ###   ########.fr       */
+/*   Updated: 2026/06/11 00:32:02 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ typedef struct s_global_data
 	t_philo			*philos;
 }	t_global_data;
 
-void				exit_program(char *exit_message);
+int					exit_program(char *exit_message);
 t_args				*init_args(char **argv, int argc);
 t_global_data		*init_philo(t_args *user_input);
 void				create_philo(t_global_data *global_data);

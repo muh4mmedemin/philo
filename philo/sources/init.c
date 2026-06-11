@@ -6,13 +6,13 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 13:29:50 by muayna            #+#    #+#             */
-/*   Updated: 2026/06/09 22:04:07 by muayna           ###   ########.fr       */
+/*   Updated: 2026/06/11 13:07:16 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-static void	isbiggerint(char **argv)
+static int	isbiggerint(char **argv)
 {
 	unsigned long	i;
 
@@ -20,16 +20,20 @@ static void	isbiggerint(char **argv)
 	while (argv[i])
 	{
 		if (ft_strlen(argv[i]) > 10)
-			exit_program("Max Int Value");
-		else if (ft_atoi(argv[i]) > 2147483647)
-			exit_program("Max Int Value");
-		else if (ft_atoi(argv[i]) == 0)
-			exit_program("You can't just type ZERO!!! FİX IN NOW!!");
+			if (exit_program("You passed max integer value"))
+				return (1);
+		if (ft_atoi(argv[i]) > 2147483647)
+			if (exit_program("You passed max integer value"))
+				return (1);
+		if (ft_atoi(argv[i]) == 0)
+			if (exit_program("You can't just type ZERO!!! FİX IN NOW!!"))
+				return (1);
 		i++;
 	}
+	return (0);
 }
 
-static void	check_all_digit(char **argv, int argc)
+static int	check_all_digit(char **argv, int argc)
 {
 	unsigned int	i;
 	unsigned int	a;
@@ -42,19 +46,25 @@ static void	check_all_digit(char **argv, int argc)
 		while (argv[a][i])
 		{
 			if (!ft_isdigit(argv[a][i]))
-				exit_program("Just type number");
+				if (exit_program("Just type number"))
+					return (1);
 			i++;
 		}
 		a++;
 	}
+	return (0);
 }
 
-static void	check_error(char **argv, int argc)
+static int	check_error(char **argv, int argc)
 {
 	if (argc != 5 && argc != 6)
-		exit_program("Missing or excessive values ​​were entered.");
-	check_all_digit(argv, argc);
-	isbiggerint(argv);
+		if (exit_program("Missing or excessive values ​​were entered."))
+			return (1);
+	if (check_all_digit(argv, argc))
+		return (1);
+	if (isbiggerint(argv))
+		return (1);
+	return (0);
 }
 
 t_args	*init_args(char **argv, int argc)
@@ -63,8 +73,10 @@ t_args	*init_args(char **argv, int argc)
 
 	user_input_list = ft_malloc((sizeof(t_args)), 0);
 	if (user_input_list == NULL)
-		exit_program("MALLOC ERROR!!!!");
-	check_error(argv, argc);
+		if (exit_program("MALLOC ERROR!!!!"))
+			return (NULL);
+	if (check_error(argv, argc))
+		return (NULL);
 	user_input_list->number_of_philo = ft_atoi(argv[1]);
 	user_input_list->time_to_die = ft_atoi(argv[2]);
 	user_input_list->time_to_eat = ft_atoi(argv[3]);

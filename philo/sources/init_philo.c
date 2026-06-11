@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 16:26:26 by muayna            #+#    #+#             */
-/*   Updated: 2026/06/09 22:37:10 by muayna           ###   ########.fr       */
+/*   Updated: 2026/06/11 13:06:23 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ t_global_data	*init_philo(t_args *user_input)
 	i = 0;
 	global_data = ft_malloc(sizeof(t_global_data), 0);
 	if (init_global_data(&global_data, &user_input) || global_data == NULL)
-		exit_program("MALLOC ERROR!");
+		if (exit_program("MALLOC ERROR!"))
+			return (NULL);
 	init_mutex(&global_data);
 	while (i < user_input->number_of_philo)
 	{
