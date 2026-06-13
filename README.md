@@ -32,6 +32,6 @@ Make and cc must be available on your computer.
 
 ## Resources
 
-Aiyı genelde soru sormak için kullandım. Yani beni hızlandırması için internette benim yerime tarama yaptırttım. Onun dışında tüm kodları ben yazdım.
-Kaynak olarak en çok buna baktım
+I mostly used AI to ask questions. In other words, I had it scan the internet for me to speed things up. Other than that, I wrote all the code myself. This was the resource I looked at the most.
+
 https://medium.com/@ruinadd/philosophers-42-guide-the-dining-philosophers-problem-893a24bc0fe2
