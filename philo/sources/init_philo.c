@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 16:26:26 by muayna            #+#    #+#             */
-/*   Updated: 2026/06/17 11:01:47 by muayna           ###   ########.fr       */
+/*   Updated: 2026/06/17 11:14:04 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,9 @@ void	create_philo(t_global_data *global_data)
 	}
 	gettimeofday(&global_data->app_start_time, NULL);
 	while (i < global_data->user_args->number_of_philo)
-    {
-        global_data->philos[i].last_meal = global_data->app_start_time.tv_usec;
-        i++;
-    }
+	{
+		global_data->philos[i].last_meal = global_data->app_start_time.tv_usec;
+		i++;
+	}
 	pthread_mutex_unlock(&global_data->first_gate);
 }
