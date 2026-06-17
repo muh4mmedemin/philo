@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 16:26:26 by muayna            #+#    #+#             */
-/*   Updated: 2026/06/11 13:06:23 by muayna           ###   ########.fr       */
+/*   Updated: 2026/06/17 11:01:47 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,18 @@ void	create_philo(t_global_data *global_data)
 	int	i;
 
 	i = 0;
+	pthread_mutex_lock(&global_data->first_gate);
 	while (i < global_data->user_args->number_of_philo)
 	{
 		pthread_create(&global_data->philo_id_numbers[i], NULL, routuine,
 			&global_data->philos[i]);
 		i++;
 	}
+	gettimeofday(&global_data->app_start_time, NULL);
+	while (i < global_data->user_args->number_of_philo)
+    {
+        global_data->philos[i].last_meal = global_data->app_start_time.tv_usec;
+        i++;
+    }
+	pthread_mutex_unlock(&global_data->first_gate);
 }

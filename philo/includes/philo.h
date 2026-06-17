@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 13:30:16 by muayna            #+#    #+#             */
-/*   Updated: 2026/06/11 00:32:02 by muayna           ###   ########.fr       */
+/*   Updated: 2026/06/14 16:56:03 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct s_global_data
 	pthread_mutex_t	*fork;
 	pthread_mutex_t	dead_mutex;
 	pthread_mutex_t	print_mutex;
+	pthread_mutex_t	first_gate;
 	t_philo			*philos;
 }	t_global_data;
 

@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 15:35:09 by muayna            #+#    #+#             */
-/*   Updated: 2026/06/09 22:35:22 by muayna           ###   ########.fr       */
+/*   Updated: 2026/06/17 11:12:43 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,11 @@ int	one_philo_handle(t_philo *philo)
 {
 	if (philo->data->user_args->number_of_philo == 1)
 	{
-		if (ft_usleep(philo->data->user_args->time_to_die + 3, philo))
+		if (ft_usleep(philo->data->user_args->time_to_die + 20, philo))
 		{
+			pthread_mutex_destroy(&philo->data->first_gate);
+			pthread_mutex_unlock(&philo->data->fork[0]);
+			pthread_mutex_destroy(&philo->data->fork[0]);
 			return (1);
 		}
 	}
@@ -64,6 +67,8 @@ void	*routuine(void *arg)
 	t_philo	*philo;
 
 	philo = ((t_philo *)arg);
+	pthread_mutex_lock(&philo->data->first_gate);
+	pthread_mutex_unlock(&philo->data->first_gate);
 	if (((t_philo *)arg)->id % 2 != 0)
 		usleep(2000);
 	while (1)
