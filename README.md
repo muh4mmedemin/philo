@@ -1,4 +1,4 @@
-This project has been created as part of the 42 curriculum by muayna
+*This project has been created as part of the 42 curriculum by muayna*
 
 ---
 
@@ -33,5 +33,9 @@ Make and cc must be available on your computer.
 ## Resources
 
 I mostly used AI to ask questions. In other words, I had it scan the internet for me to speed things up. Other than that, I wrote all the code myself. This was the resource I looked at the most.
+
+## 🤖 AI Usage
+
+AI tools (specifically LLMs) were utilized during the development of this project to accelerate the research process, clarify complex multi-threading concepts, and debug edge cases. However, all project code was written manually from scratch, ensuring a deep, firsthand understanding of data races and synchronization.
 
 https://medium.com/@ruinadd/philosophers-42-guide-the-dining-philosophers-problem-893a24bc0fe2
