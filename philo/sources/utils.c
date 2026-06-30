@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 16:04:13 by muayna            #+#    #+#             */
-/*   Updated: 2026/06/09 22:30:44 by muayna           ###   ########.fr       */
+/*   Updated: 2026/06/30 16:11:40 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	ft_usleep(unsigned long long sleep_time_ms, t_philo *philo)
 		}
 		gettimeofday(&time, NULL);
 		current_time = (time.tv_sec * 1000ULL) + (time.tv_usec / 1000);
-		usleep(300);
+		usleep(50);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 15:35:09 by muayna            #+#    #+#             */
-/*   Updated: 2026/06/30 15:02:19 by muayna           ###   ########.fr       */
+/*   Updated: 2026/06/30 16:13:46 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	*routuine(void *arg)
 	pthread_mutex_lock(&philo->data->first_gate);
 	pthread_mutex_unlock(&philo->data->first_gate);
 	if (((t_philo *)arg)->id % 2 != 0)
-		usleep(2000);
+		usleep(1000);
 	while (1)
 	{
 		pthread_mutex_lock(&philo->data->print_mutex);
@@ -82,9 +82,7 @@ void	*routuine(void *arg)
 		print_str(calculate_timestep(philo->data), philo->id, "is thinking");
 		pthread_mutex_unlock(&philo->data->print_mutex);
 		if (philo->data->user_args->number_of_philo % 2 != 0)
-			ft_usleep(5, philo);
-		else
-			usleep(200);
+			ft_usleep(1, philo);
 		if (take_fork(philo) == 1)
 			break ;
 		if (eat_meal(philo))

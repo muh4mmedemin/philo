@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 22:32:04 by muayna            #+#    #+#             */
-/*   Updated: 2026/06/09 22:33:57 by muayna           ###   ########.fr       */
+/*   Updated: 2026/06/30 16:09:40 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	init_fork_variable(long long *first_fork, long long *sec_fork,
 	{
 		(*first_fork) = philo->left_fork;
 		(*sec_fork) = philo->right_fork;
-		usleep(2000);
+		//usleep(2000);
 	}
 	else
 	{
