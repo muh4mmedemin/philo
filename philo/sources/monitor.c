@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 16:25:03 by muayna            #+#    #+#             */
-/*   Updated: 2026/06/09 22:24:51 by muayna           ###   ########.fr       */
+/*   Updated: 2026/06/30 14:56:08 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,11 @@ static void	check_eat_count(t_global_data **data)
 {
 	long long	b;
 
-	if ((*data)->user_args->eat_count != -1)
+	if ((*data)->user_args->eat_count != -1 && (*data)->user_args->number_of_philo != 1)
 	{
 		b = 0;
 		while (b <= ((*data)->user_args->number_of_philo - 1))
 		{
-			usleep(1000);
 			if (b == (*data)->user_args->number_of_philo - 1)
 			{
 				pthread_mutex_lock(&(*data)->dead_mutex);
@@ -85,7 +84,6 @@ void	*check_philo_health(void *arg)
 	kill_time = data->user_args->time_to_die;
 	while (anyone_dead(&data->philos[i]) != 1)
 	{
-		usleep(200);
 		check_eat_count(&data);
 		if (anyone_dead(&data->philos[i]))
 			break ;
