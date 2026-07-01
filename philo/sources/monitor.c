@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 16:25:03 by muayna            #+#    #+#             */
-/*   Updated: 2026/06/30 16:44:57 by muayna           ###   ########.fr       */
+/*   Updated: 2026/07/01 11:22:18 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,24 @@ void	*check_philo_health(void *arg)
 	kill_time = data->user_args->time_to_die;
 	while (anyone_dead(&data->philos[i]) != 1)
 	{
-		check_eat_count(&data);
+		/* ONEMLI DUZELTME:
+		** check_eat_count() tum philolari (0..N-1) tek tek safe_lock
+		** ile kilitleyip O(N) tarama yapiyor. Eskiden bu fonksiyon
+		** monitor dongusunun HER adiminda cagriliyordu (yani philo
+		** index'i 1 arttikca tekrar tekrar), bu da tam bir monitor
+		** turunda O(N*N) mutex lock/unlock demekti. Buyuk N'lerde
+		** (orn. 198-199 philo) bu, saniyede on binlerce gereksiz
+		** kilitlemeye yol aciyor, bu da gercek philo thread'lerinin
+		** fork/print_mutex/safe_lock alma suresini geciktiriyor ve
+		** zamaninda yiyen bir philo bile time_to_die siniri asilmis
+		** gibi yanlislikla "died" olarak isaretlenebiliyordu.
+		**
+		** Duzeltme: check_eat_count() sadece tam bir tur tamamlanip
+		** basa donuldugunde (i == 0) cagriliyor. Boylece is O(N)
+		** yerine O(N) kaliyor ama artik dongu basina bir kere,
+		** N kat daha az kilit trafigi olusuyor. */
+		if (i == 0)
+			check_eat_count(&data);
 		if (anyone_dead(&data->philos[i]))
 			break ;
 		if (opearate_philo_dead(&data, kill_time, i))

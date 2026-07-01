@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 15:35:09 by muayna            #+#    #+#             */
-/*   Updated: 2026/06/30 17:04:23 by muayna           ###   ########.fr       */
+/*   Updated: 2026/07/01 11:16:31 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,57 @@ void	lock_mutexes(pthread_mutex_t *first, pthread_mutex_t *sec)
 		pthread_mutex_lock(sec);
 }
 
+/*
+** Tek sayida philo icin adalet (fairness) kontrolu.
+** Butun philolar arasinda gezip en eski last_meal degerine
+** sahip olan (yani en uzun suredir yememis olan) philo kim ona bakar.
+** Eger o philo "philo" degilse, bu philonun once yemesi icin
+** bir hakki yok demektir, oncelik baskasinda.
+*/
+static int	has_priority(t_philo *philo)
+{
+	long long			i;
+	unsigned long long	my_meal;
+	unsigned long long	other_meal;
+
+	pthread_mutex_lock(&philo->safe_lock);
+	my_meal = philo->last_meal;
+	pthread_mutex_unlock(&philo->safe_lock);
+	i = 0;
+	while (i < philo->data->user_args->number_of_philo)
+	{
+		if (&philo->data->philos[i] != philo)
+		{
+			pthread_mutex_lock(&philo->data->philos[i].safe_lock);
+			other_meal = philo->data->philos[i].last_meal;
+			pthread_mutex_unlock(&philo->data->philos[i].safe_lock);
+			if (other_meal < my_meal)
+				return (0);
+		}
+		i++;
+	}
+	return (1);
+}
+
+/*
+** Oncelik bizde olana kadar (yani en ac philo biz olana kadar)
+** thinking asamasinda kucuk araliklarla bekle (fazladan uyu).
+** Bu sayede sirasi gelmeyen philo forklara saldirmiyor, gercekten
+** en uzun suredir yememis philoya oncelik veriliyor.
+*/
+static int	wait_for_priority(t_philo *philo)
+{
+	while (has_priority(philo) == 0)
+	{
+		if (anyone_dead(philo))
+			return (1);
+		usleep(500);
+	}
+	if (anyone_dead(philo))
+		return (1);
+	return (0);
+}
+
 void	*routuine(void *arg)
 {
 	t_philo	*philo;
@@ -82,7 +133,10 @@ void	*routuine(void *arg)
 		print_str(calculate_timestep(philo->data), philo->id, "is thinking");
 		pthread_mutex_unlock(&philo->data->print_mutex);
 		if (philo->data->user_args->number_of_philo % 2 != 0)
-			ft_usleep(1, philo);
+		{
+			if (wait_for_priority(philo))
+				break ;
+		}
 		if (take_fork(philo) == 1)
 			break ;
 		if (eat_meal(philo))
