@@ -6,7 +6,7 @@
 /*   By: muayna <muayna@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 16:25:03 by muayna            #+#    #+#             */
-/*   Updated: 2026/06/30 16:44:57 by muayna           ###   ########.fr       */
+/*   Updated: 2026/07/01 14:11:15 by muayna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ void	*check_philo_health(void *arg)
 	kill_time = data->user_args->time_to_die;
 	while (anyone_dead(&data->philos[i]) != 1)
 	{
-		check_eat_count(&data);
+		if (i == 0)
+			check_eat_count(&data);
 		if (anyone_dead(&data->philos[i]))
 			break ;
 		if (opearate_philo_dead(&data, kill_time, i))
