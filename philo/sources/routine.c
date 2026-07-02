@@ -70,6 +70,7 @@ void	*routuine(void *arg)
 	first_sleep(philo);
 	while (1)
 	{
+		first_gate_lock(philo);
 		pthread_mutex_lock(&philo->data->print_mutex);
 		if (anyone_dead(philo))
 		{
