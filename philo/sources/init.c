@@ -87,3 +87,9 @@ t_args	*init_args(char **argv, int argc)
 		user_input_list->eat_count = -1;
 	return (user_input_list);
 }
+
+void	first_sleep(t_philo *philo)
+{
+	if (philo->id % 2 != 0)
+		usleep(1000);
+}

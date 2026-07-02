@@ -88,3 +88,9 @@ void	create_philo(t_global_data *global_data)
 	}
 	pthread_mutex_unlock(&global_data->first_gate);
 }
+
+void	first_gate_lock(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->data->first_gate);
+	pthread_mutex_unlock(&philo->data->first_gate);
+}

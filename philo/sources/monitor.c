@@ -23,7 +23,8 @@ static void	check_eat_count(t_global_data **data)
 {
 	long long	b;
 
-	if ((*data)->user_args->eat_count != -1 && (*data)->user_args->number_of_philo != 1)
+	if ((*data)->user_args->eat_count != -1
+		&& (*data)->user_args->number_of_philo != 1)
 	{
 		b = 0;
 		while (b <= ((*data)->user_args->number_of_philo - 1))

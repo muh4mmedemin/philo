@@ -67,7 +67,6 @@ static void	init_fork_variable(long long *first_fork, long long *sec_fork,
 	{
 		(*first_fork) = philo->left_fork;
 		(*sec_fork) = philo->right_fork;
-		//usleep(2000);
 	}
 	else
 	{

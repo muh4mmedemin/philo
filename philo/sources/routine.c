@@ -64,16 +64,10 @@ void	lock_mutexes(pthread_mutex_t *first, pthread_mutex_t *sec)
 
 void	*routuine(void *arg)
 {
-	t_philo	*philo;
-	long long think_time;
-
-
+	t_philo		*philo;
 
 	philo = ((t_philo *)arg);
-	pthread_mutex_lock(&philo->data->first_gate);
-	pthread_mutex_unlock(&philo->data->first_gate);
-	if (((t_philo *)arg)->id % 2 != 0)
-		usleep(1000);
+	first_sleep(philo);
 	while (1)
 	{
 		pthread_mutex_lock(&philo->data->print_mutex);
@@ -84,14 +78,8 @@ void	*routuine(void *arg)
 		}
 		print_str(calculate_timestep(philo->data), philo->id, "is thinking");
 		pthread_mutex_unlock(&philo->data->print_mutex);
-		if (philo->data->user_args->number_of_philo % 2 != 0)
-		{
-			think_time = (philo->data->user_args->time_to_eat * 2) - philo->data->user_args->time_to_sleep;
-			if (think_time < 0)
-				think_time = 0;
-			if (think_time > 0)
-				ft_usleep(think_time, philo);
-		}
+		if (think_philo(philo))
+			break ;
 		if (take_fork(philo) == 1)
 			break ;
 		if (eat_meal(philo))

@@ -21,11 +21,6 @@
 # include "utils.h"
 # include <sys/time.h>
 
-/*
-eat_count value is a optinal value, it can be empty.
-Others value is requaried, Must not empty.
-*/
-
 enum	e_philo_state
 {
 	THINK,
@@ -81,5 +76,7 @@ int					eat_meal(t_philo *philo);
 void				*routuine(void *arg);
 int					one_philo_handle(t_philo *philo);
 void				lock_mutexes(pthread_mutex_t *first, pthread_mutex_t *sec);
-
+int					think_philo(t_philo *philo);
+void				first_sleep(t_philo *philo);
+void				first_gate_lock(t_philo *philo);
 #endif

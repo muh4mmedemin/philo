@@ -27,6 +27,26 @@ static void	destroy_mutex(t_global_data *global_data)
 	}
 }
 
+int	think_philo(t_philo *philo)
+{
+	long long	think_time;
+
+	if (philo->data->user_args->number_of_philo % 2 != 0)
+	{
+		think_time = (philo->data->user_args->time_to_eat * 2)
+			- philo->data->user_args->time_to_sleep;
+		if (think_time < 0)
+			think_time = 0;
+		if (think_time > 0)
+		{
+			if (ft_usleep(think_time, philo))
+				return (1);
+		}
+		return (0);
+	}
+	return (0);
+}
+
 unsigned long long	calculate_timestep(t_global_data *global_data)
 {
 	struct timeval		current_time;
